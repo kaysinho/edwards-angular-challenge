@@ -1,0 +1,32 @@
+<h2>Responsive Table</h2>
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+        <tr>
+            <th>Category</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Who</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Replacement?</th>
+            <th>When?</th>
+            <th>Comments</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let p of products">
+            <td>{{ getCategoryName(p.category) }}</td>
+            <td>{{ getProductName(p.product) }}</td>
+            <td>{{ p.quantity }}</td>
+            <td>{{ getRoleName(p.role) }}</td>
+            <td>{{ p.contactName }}</td>
+            <td>{{ p.contactEmail | lowercase }}</td>
+            <td>{{ p.replacement== 0 ? 'No' : 'Yes' }}</td>
+            <td>{{ p.dateOfReplacement | date }}</td>
+            <td width="400px">{{ p.comments }}</td>
+        </tr>
+
+        <tbody>
+    </table>
+</div>

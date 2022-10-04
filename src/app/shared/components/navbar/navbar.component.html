@@ -1,0 +1,6 @@
+<nav class="container">
+    <ul>
+      <li [ngClass]="{'active' : isActive('product-return')}" (click)="goTo('/product-return')">Product Return</li>
+      <li [ngClass]="{'active' : isActive('product-returned-list')}" (click)="goTo('/product-returned-list')">Product Return List</li>
+    </ul>
+  </nav>

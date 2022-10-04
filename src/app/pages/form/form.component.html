@@ -1,0 +1,79 @@
+<h1>Product Return Form</h1>
+
+<form novalidate [formGroup]="form" (ngSubmit)="addProduct()">
+    <h5>Product Information</h5>
+    <div class="form-field">
+        <label for="category">Product Category <span aria-hidden="true" class="required">*</span></label>
+        <select class="form-control" (change)="onChangeCategory()" formControlName="category" id="category" >
+            <option disabled selected value="0" >Select an option</option>
+            <option *ngFor="let category of categoryService.categories | async" [ngValue]="category.id">{{ category.id }} - {{ category.name }}</option>
+        </select>
+        <span class="error-message" *ngIf="form.get('category')?.invalid && form.get('category')?.touched">This field is mandatory</span>
+    </div>
+    <div class="form-field">
+        <label for="product">Product Code <span aria-hidden="true" class="required">*</span></label>
+        <select class="form-control" formControlName="product"  id="product" >
+            <option disabled selected value="0" >Select an option</option>
+            <option *ngFor="let product of products" [ngValue]="product.id">{{ product.id }} - {{ product.name }} </option>
+        </select>
+        <span class="error-message" *ngIf="form.get('product')?.invalid && form.get('product')?.touched">This field is mandatory</span>
+
+    </div>
+    <div class="form-field">
+        <label for="quantity">Quantity <span aria-hidden="true" class="required">*</span></label>
+        <input class="form-control" formControlName="quantity" type="number" id="quantity" />
+        <span class="error-message" *ngIf="form.get('quantity')?.invalid && form.get('quantity')?.touched">This field must be greather than 1</span>
+
+    </div>
+
+    <h5>Who will return the items?</h5>
+
+    <div class="form-field">
+        <div class="radio-item" *ngFor="let role of rolesService.roles | async">
+            <input class="form-control" (onchange)="validateContactForm()"  formControlName="role" type="radio" [value]="role.id" [id]="role.name"  /><label>{{ role.name }}</label>
+        </div>
+    </div>
+    <div *ngIf="form.controls['role'].value === 1">
+        <div class="form-field">
+            <label for="firstname">Customer Contact Name <span aria-hidden="true" class="required">*</span></label>
+            <input class="form-control" formControlName="contactName" type="text" id="firstname" />
+            <span class="error-message" *ngIf="form.get('contactName')?.invalid && form.get('category')?.touched">This field is mandatory</span>
+
+        </div>
+
+        <div class="form-field">
+            <label for="email">Customer Email Address <span aria-hidden="true" class="required">*</span></label>
+            <input class="form-control" formControlName="contactEmail" type="email" id="email" />
+            <span class="error-message" *ngIf="form.get('contactEmail')?.invalid && form.get('category')?.touched">This field is mandatory</span>
+
+        </div>
+
+    </div>
+
+    <h5>Replacement is needed?</h5>
+
+    <div class="form-field">
+        <div class="radio-item">
+            <input class="form-control" formControlName="replacement" type="radio" [value]=1 id="yes"  /><label>Yes</label>
+        </div>
+
+        <div class="radio-item">
+            <input class="form-control" formControlName="replacement" type="radio" [value]=0 id="no"  /><label>No</label>
+        </div>
+    </div>
+
+    <div *ngIf="form.controls['replacement'].value == 1">
+        <div class="form-field">
+            <label for="date">Date Replacement Needed By </label>
+            <input class="form-control" formControlName="dateOfReplacement" type="date" id="date" />
+        </div>
+
+        <div class="form-field">
+            <label for="comments">Comments </label>
+            <textarea class="form-control" formControlName="comments"  id="comments" ></textarea>
+        </div>
+
+    </div>
+
+    <button>Submit</button>
+</form>
