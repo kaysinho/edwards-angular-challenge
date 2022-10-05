@@ -37,14 +37,14 @@
         <div class="form-field">
             <label for="firstname">Customer Contact Name <span aria-hidden="true" class="required">*</span></label>
             <input class="form-control" formControlName="contactName" type="text" id="firstname" />
-            <span class="error-message" *ngIf="form.get('contactName')?.invalid && form.get('category')?.touched">This field is mandatory</span>
+            <span class="error-message" *ngIf="form.get('contactName')?.invalid && form.get('contactName')?.touched">This field is mandatory</span>
 
         </div>
 
         <div class="form-field">
             <label for="email">Customer Email Address <span aria-hidden="true" class="required">*</span></label>
             <input class="form-control" formControlName="contactEmail" type="email" id="email" />
-            <span class="error-message" *ngIf="form.get('contactEmail')?.invalid && form.get('category')?.touched">This field is mandatory</span>
+            <span class="error-message" *ngIf="form.get('contactEmail')?.invalid && form.get('contactEmail')?.touched">This field is mandatory</span>
 
         </div>
 
@@ -65,7 +65,9 @@
     <div *ngIf="form.controls['replacement'].value == 1">
         <div class="form-field">
             <label for="date">Date Replacement Needed By </label>
-            <input class="form-control" formControlName="dateOfReplacement" type="date" id="date" />
+            <input class="form-control"  formControlName="dateOfReplacement" type="datetime-local" id="dateOfReplacement" />
+            <span class="error-message" *ngIf="form.get('dateOfReplacement')?.invalid && form.get('dateOfReplacement')?.touched">The date must be greather or equal than 2 days and 1 minute after today</span>
+
         </div>
 
         <div class="form-field">

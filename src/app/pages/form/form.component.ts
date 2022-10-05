@@ -7,6 +7,7 @@ import { RoleService } from 'src/app/shared/services/role.service';
 
 import * as Notiflix from 'notiflix';
 import { DatabaseService } from 'src/app/shared/services/database.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-form',
@@ -22,7 +23,7 @@ export class FormComponent implements OnInit, AfterViewInit {
     contactName : new FormControl('', [Validators.max(255)]),
     contactEmail : new FormControl('', [Validators.email, Validators.max(255)]),
     replacement : new FormControl(0, [Validators.required]),
-    dateOfReplacement : new FormControl(this.getDate(), [CustomValidators.dateMinimum(this.getDate())]),
+    dateOfReplacement : new FormControl(new Date(), [ CustomValidators.dateMinimum(this.getMinDate())]),
     comments : new FormControl('', [ Validators.max(1000)])
   })
   constructor(
@@ -54,15 +55,10 @@ export class FormComponent implements OnInit, AfterViewInit {
       })
   }
 
-  getDate():Date{
+  getMinDate():Date{
     let date = new Date();
     date.setDate(date.getDate() + 2);
     return date;
-  }
-
-  validateDate(){
-    if (new Date(this.form.controls['dateOfReplacement'].value) < this.getDate()) return false;
-    return true;
   }
 
   addProduct(){

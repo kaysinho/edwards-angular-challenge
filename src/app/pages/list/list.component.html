@@ -23,7 +23,7 @@
             <td>{{ p.contactName }}</td>
             <td>{{ p.contactEmail | lowercase }}</td>
             <td>{{ p.replacement== 0 ? 'No' : 'Yes' }}</td>
-            <td>{{ p.dateOfReplacement | date }}</td>
+            <td>{{ p.dateOfReplacement | date: 'MMM dd, yyyy hh:mm a' }}</td>
             <td width="400px">{{ p.comments }}</td>
         </tr>
 

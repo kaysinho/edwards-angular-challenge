@@ -6,8 +6,8 @@ export class CustomValidators {
         if (control.value == null) {
           return null;
         }
-    
-        return new Date(control.value) >= min ? null : {
+        
+        return new Date(control.value) > min ? null : {
           'date-minimum': {
             'date-minimum': min,
             'actual': control.value
